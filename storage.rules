@@ -1,0 +1,23 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Users can upload and access their own files
+    match /users/{userId}/{allPaths=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Profile images
+    match /profile_images/{userId} {
+      allow read: if true; // Profile images can be public
+      allow write: if request.auth != null && request.auth.uid == userId
+                   && request.resource.size < 5 * 1024 * 1024 // 5MB max
+                   && request.resource.contentType.matches('image/.*');
+    }
+    
+    // Document uploads (encrypted)
+    match /documents/{userId}/{documentId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId
+                         && request.resource.size < 10 * 1024 * 1024; // 10MB max
+    }
+  }
+}

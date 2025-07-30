@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  # Digital Fayda Wallet Web App
+  web:
+    build: .
+    container_name: digital-fayda-wallet
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - fayda-network
+
+  # Firebase Emulator (for development)
+  firebase-emulator:
+    image: firebase/firebase-tools:latest
+    container_name: firebase-emulator
+    ports:
+      - "9099:9099"  # Auth emulator
+      - "8080:8080"  # Firestore emulator
+      - "9199:9199"  # Database emulator
+      - "5001:5001"  # Functions emulator
+      - "8085:8085"  # Pub/Sub emulator
+      - "9000:9000"  # Hosting emulator
+      - "4000:4000"  # Emulator Suite UI
+    volumes:
+      - ./firebase.json:/workspace/firebase.json
+      - ./firestore.rules:/workspace/firestore.rules
+      - ./storage.rules:/workspace/storage.rules
+    working_dir: /workspace
+    command: >
+      bash -c "
+        firebase emulators:start --only auth,firestore,functions,storage --host 0.0.0.0
+      "
+    networks:
+      - fayda-network
+
+  # Redis for session management and caching
+  redis:
+    image: redis:7-alpine
+    container_name: fayda-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - fayda-network
+
+  # Nginx reverse proxy
+  nginx-proxy:
+    image: nginx:alpine
+    container_name: fayda-nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx-proxy.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - web
+    restart: unless-stopped
+    networks:
+      - fayda-network
+
+volumes:
+  redis_data:
+
+networks:
+  fayda-network:
+    driver: bridge

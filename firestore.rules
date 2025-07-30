@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can read and write their own data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Wallet data is private to each user
+    match /wallets/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // ID verification logs - read only for users, write for verification system
+    match /verification_logs/{logId} {
+      allow read: if request.auth != null && 
+                     request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null;
+    }
+    
+    // Public verification data (for QR code validation)
+    match /public_verifications/{verificationId} {
+      allow read: if true; // Public read for verification
+      allow create, update: if request.auth != null;
+      allow delete: if request.auth != null && 
+                       request.auth.uid == resource.data.userId;
+    }
+  }
+}

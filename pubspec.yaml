@@ -1,0 +1,84 @@
+name: digital_fayda_wallet
+description: A digital wallet app for secure Fayda ID storage and verification
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # UI Components
+  cupertino_icons: ^1.0.6
+  material_design_icons_flutter: ^7.0.7296
+  
+  # State Management
+  provider: ^6.1.1
+  riverpod: ^2.4.9
+  flutter_riverpod: ^2.4.9
+  
+  # Authentication & Security
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.15.3
+  cloud_firestore: ^4.13.6
+  firebase_storage: ^11.5.6
+  local_auth: ^2.1.7
+  crypto: ^3.0.3
+  encrypt: ^5.0.3
+  
+  # QR Code Generation & Scanning
+  qr_flutter: ^4.1.0
+  qr_code_scanner: ^1.0.1
+  flutter_barcode_scanner: ^2.0.0
+  
+  # Storage & Persistence
+  shared_preferences: ^2.2.2
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  secure_storage: ^1.1.0+2
+  flutter_secure_storage: ^9.0.0
+  
+  # Networking
+  http: ^1.1.2
+  dio: ^5.4.0
+  
+  # Navigation
+  go_router: ^12.1.3
+  
+  # Utilities
+  permission_handler: ^11.1.0
+  device_info_plus: ^9.1.1
+  package_info_plus: ^4.2.0
+  path_provider: ^2.1.1
+  intl: ^0.18.1
+  
+  # UI Enhancements
+  lottie: ^2.7.0
+  shimmer: ^3.0.0
+  cached_network_image: ^3.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.7
+  json_annotation: ^4.8.1
+  json_serializable: ^6.7.1
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/animations/
+    - assets/icons/
+  
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
