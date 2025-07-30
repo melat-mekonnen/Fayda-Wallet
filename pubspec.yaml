@@ -1,6 +1,7 @@
 name: digital_fayda_wallet
 description: A digital wallet app for secure Fayda ID storage and verification
 version: 1.0.0+1
+publish_to: 'none'
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -30,14 +31,12 @@ dependencies:
   
   # QR Code Generation & Scanning
   qr_flutter: ^4.1.0
-  qr_code_scanner: ^1.0.1
-  flutter_barcode_scanner: ^2.0.0
+  mobile_scanner: ^3.5.6
   
   # Storage & Persistence
   shared_preferences: ^2.2.2
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  secure_storage: ^1.1.0+2
   flutter_secure_storage: ^9.0.0
   
   # Networking
@@ -49,7 +48,7 @@ dependencies:
   
   # Utilities
   permission_handler: ^11.1.0
-  device_info_plus: ^9.1.1
+  device_info_plus: ^9.1.2
   package_info_plus: ^4.2.0
   path_provider: ^2.1.1
   intl: ^0.18.1
@@ -57,12 +56,12 @@ dependencies:
   # UI Enhancements
   lottie: ^2.7.0
   shimmer: ^3.0.0
-  cached_network_image: ^3.3.0
+  cached_network_image: ^3.3.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
+  flutter_lints: ^3.0.2
   hive_generator: ^2.0.1
   build_runner: ^2.4.7
   json_annotation: ^4.8.1
@@ -75,10 +74,3 @@ flutter:
     - assets/images/
     - assets/animations/
     - assets/icons/
-  
-  fonts:
-    - family: Roboto
-      fonts:
-        - asset: assets/fonts/Roboto-Regular.ttf
-        - asset: assets/fonts/Roboto-Bold.ttf
-          weight: 700
