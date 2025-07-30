@@ -28,6 +28,12 @@ dependencies:
   crypto: ^3.0.3
   encrypt: ^5.0.3
   
+  # OIDC & OAuth2
+  oauth2: ^2.0.2
+  openid_client: ^0.4.6
+  url_launcher: ^6.2.2
+  jwt_decoder: ^2.0.1
+
   # QR Code Generation & Scanning
   qr_flutter: ^4.1.0
   qr_code_scanner: ^1.0.1
